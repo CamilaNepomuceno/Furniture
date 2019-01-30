@@ -1,0 +1,24 @@
+﻿@model FurnitureStore.Domain.Entities.Product
+
+<div class="well">
+    <h3>
+        <strong><a href="@Url.Action("Details", new { productid = Model.Id})">@Model.Name</a></strong> /
+        <span class="lead"> @Model.Category</span>
+        <span class="pull-right label label-primary">@Model.Price.ToString("c")</span>
+    </h3>
+
+    @using (Html.BeginForm("AddToCart", "Cart"))
+    {
+        <div class="pull-right">
+            @Html.HiddenFor(x => x.Id)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-success" value="Add to cart" />
+        </div>
+    }
+
+    <span class="lead"> @Model.Description</span>
+    
+    <br />
+    <img style="max-height:150px" src="~/Content/Furniture/ProductsImg/@Model.ImageUrl" alt="@Model.Name" />
+</div>
+
